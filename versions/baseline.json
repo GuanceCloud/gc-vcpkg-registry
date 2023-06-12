@@ -1,0 +1,5 @@
+{
+  "default": {
+    "datakit-sdk-cpp": { "baseline": "1.0.1-alpha", "port-version": 0 }
+  }
+}
