@@ -3,7 +3,7 @@ vcpkg_check_linkage(ONLY_DYNAMIC_LIBRARY)
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO GuanceCloud/datakit-cpp
-  REF a76c7e7bd867e3bf3e34c48f5ab758d0991a4dab.tar.gz
+  REF a76c7e7bd867e3bf3e34c48f5ab758d0991a4dab
   SHA512 c700b91243865a5e885ed9e193843e72dd3cd9e9695898a79180fa112cdc67dc4e4ca5191a7223fa21fbf16b1c9875f2a0209abba19d999751b14643621d73de
   HEAD_REF develop
 )
