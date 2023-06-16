@@ -24,9 +24,6 @@ vcpkg_configure_cmake(
   WINDOWS_USE_MSBUILD
   OPTIONS
 	  -DBUILD_FROM_VCPKG=TRUE
-
-  # CONFIGURE_ENVIRONMENT_VARIABLES
-  #       BUILD_FROM_VCPKG=TRUE
 )
 vcpkg_install_cmake()
 
@@ -47,10 +44,16 @@ if(VCPKG_TARGET_IS_WINDOWS)
     #endif()
   endif()
 elseif(VCPKG_TARGET_IS_LINUX)
+  message(STATUS "copying release:" VCPKG_TARGET_ARCHITECTURE)
   if(VCPKG_TARGET_ARCHITECTURE STREQUAL "x64")
-    file(GLOB libs "${SOURCE_PATH}/lib/x86_64/*")
-    file(COPY ${libs} DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+    set(_ARCH_ "x86_64")
+  elseif (VCPKG_TARGET_ARCHITECTURE STREQUAL "arm64")
+    set(_ARCH_ "aarch64")
   endif()
+  
+  file(COPY "${SOURCE_PATH}/datakit_sdk_redist/Debug/lib/${_ARCH_}/libft-sdk.so" DESTINATION "${CURRENT_PACKAGES_DIR}/debug/lib")
+  #file(COPY "${SOURCE_PATH}/datakit_sdk_redist/Release/lib/${_ARCH_}/libft-sdk.a" DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
+  file(COPY "${SOURCE_PATH}/datakit_sdk_redist/Release/lib/${_ARCH_}/libft-sdk.so" DESTINATION "${CURRENT_PACKAGES_DIR}/lib")
 endif()
 #endif()
 
