@@ -1,29 +1,31 @@
 {
-    "name": "datakit-sdk-cpp",
-    "version": "1.0.1-alpha",
-    "description": "Guance C++ library to collect RUM/Log/Trace data to datakit agent",
-    "homepage": "https://github.com/GuanceCloud/datakit-cpp",
-    "dependencies": [  
-   	    {
-            "name": "spdlog",
-            "version>=":"1.11.0"
-        },
-        {
-            "name": "nlohmann-json",
-            "version>=":"3.11.2"
-        },
-        {
-            "name": "restclient-cpp",
-            "version>=":"2022-02-09"
-        },
-        {
-            "name": "sqlitecpp",
-            "version>=":"3.2.0"
-        },
-	    {
-           "name": "stduuid",
-           "features": ["gsl-span"],
-           "version>=": "1.2.2"
-        }
-	]
+  "name": "datakit-sdk-cpp",
+  "version": "1.0.2-alpha",
+  "description": "Guance C++ library to collect RUM/Log/Trace data to datakit agent",
+  "homepage": "https://github.com/GuanceCloud/datakit-cpp",
+  "dependencies": [
+    {
+      "name": "spdlog",
+      "version>=": "1.11.0"
+    },
+    {
+      "name": "nlohmann-json",
+      "version>=": "3.11.2"
+    },
+    {
+      "name": "restclient-cpp",
+      "version>=": "2022-02-09"
+    },
+    {
+      "name": "sqlitecpp",
+      "version>=": "3.2.0"
+    },
+    {
+      "name": "stduuid",
+      "features": [
+        "gsl-span"
+      ],
+      "version>=": "1.2.2"
+    }
+  ]
 }
