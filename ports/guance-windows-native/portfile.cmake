@@ -15,8 +15,8 @@ else()
     vcpkg_from_github(
         OUT_SOURCE_PATH SOURCE_PATH
         REPO GuanceCloud/datakit-windows-desktop
-        REF "vcpkg_0.1.0-alpha.1"
-        SHA512 3204545aa0f140e964ec8992ee0b13afab8a7c54fb3775f967d934af2ff76e887a9bf4a8b970077657f609cf081dc1106a0b9252c435066dd012ad8a593fd413
+        REF "vcpkg_0.1.0-alpha.2"
+        SHA512 02d155166812e397442b6812fb3f9daadaf169b5c016c790649a3a0d8c5b0e7183b828717b9c526cae92257aab71e6209b7daf9028b3e721be0d32996c63418c
         HEAD_REF main)
 endif()
 

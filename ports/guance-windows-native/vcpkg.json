@@ -1,6 +1,6 @@
 {
   "name": "guance-windows-native",
-  "version-semver": "0.1.0-alpha.1",
+  "version-semver": "0.1.0-alpha.2",
   "description": "Guance Windows native observability SDK for RUM, distributed tracing, and logging",
   "homepage": "https://github.com/GuanceCloud/datakit-windows-desktop",
   "documentation": "https://github.com/GuanceCloud/datakit-windows-desktop#readme",
