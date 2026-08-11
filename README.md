@@ -50,6 +50,44 @@ Then run vcpkg in manifest mode:
 vcpkg install
 ```
 
+### Electron native bridge
+
+Electron applications can install the optional native bridge by enabling the
+`electron-bridge` feature in the manifest:
+
+```json
+{
+  "dependencies": [
+    {
+      "name": "guance-windows-native",
+      "features": [
+        "electron-bridge"
+      ]
+    }
+  ]
+}
+```
+
+For classic mode, install the same feature explicitly:
+
+```console
+vcpkg install "guance-windows-native[electron-bridge]:x64-windows"
+```
+
+The bridge executable and its native runtime are installed under the selected
+triplet's tools directory:
+
+```text
+vcpkg_installed/<triplet>/tools/guance-windows-native/
+├── guance_windows_electron_bridge.exe
+└── guance_windows_native.dll
+```
+
+The Electron renderer uses the Guance Browser SDK. The Electron main process
+owns the trusted IPC boundary and starts `guance_windows_electron_bridge.exe`.
+No separate Guance Electron npm package is required. Applications must package
+the bridge executable and its native runtime together.
+
 See Microsoft's [Git registry tutorial](https://learn.microsoft.com/vcpkg/consume/git-registries) for more information about baselines and registry configuration.
 
 ## Repository layout
