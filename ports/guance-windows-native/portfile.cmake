@@ -15,9 +15,14 @@ else()
     vcpkg_from_github(
         OUT_SOURCE_PATH SOURCE_PATH
         REPO GuanceCloud/datakit-windows-desktop
-        REF "vcpkg_0.1.0-alpha.2"
-        SHA512 02d155166812e397442b6812fb3f9daadaf169b5c016c790649a3a0d8c5b0e7183b828717b9c526cae92257aab71e6209b7daf9028b3e721be0d32996c63418c
+        REF "vcpkg_0.1.0-alpha.3"
+        SHA512 027fe2aed01b03dae5c8ca39611107f217b3783f2ca0050b8eac6cf953bea971ea41aca81c743f13331028fbc6cb54b838c834e9bfa17da859d0fa8e4e316362
         HEAD_REF main)
+endif()
+
+set(GUANCE_WINDOWS_NATIVE_BUILD_ELECTRON_BRIDGE OFF)
+if("electron-bridge" IN_LIST FEATURES)
+    set(GUANCE_WINDOWS_NATIVE_BUILD_ELECTRON_BRIDGE ON)
 endif()
 
 vcpkg_cmake_configure(
@@ -25,12 +30,18 @@ vcpkg_cmake_configure(
     OPTIONS
         -DBUILD_SHARED_LIBS=ON
         -DBUILD_TESTING=OFF
+        -DGUANCE_WINDOWS_NATIVE_BUILD_ELECTRON_BRIDGE=${GUANCE_WINDOWS_NATIVE_BUILD_ELECTRON_BRIDGE}
         -DGUANCE_WINDOWS_NATIVE_STAGE_RUNTIME=OFF)
 vcpkg_cmake_install()
 vcpkg_cmake_config_fixup(
     PACKAGE_NAME GuanceWindowsNative
     CONFIG_PATH lib/cmake/GuanceWindowsNative)
 vcpkg_copy_pdbs()
+if("electron-bridge" IN_LIST FEATURES)
+    vcpkg_copy_tools(
+        TOOL_NAMES guance_windows_electron_bridge
+        AUTO_CLEAN)
+endif()
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 file(INSTALL "${SOURCE_PATH}/LICENSE"
