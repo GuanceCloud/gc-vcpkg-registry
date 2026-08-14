@@ -15,8 +15,8 @@ else()
     vcpkg_from_github(
         OUT_SOURCE_PATH SOURCE_PATH
         REPO GuanceCloud/datakit-windows-desktop
-        REF "vcpkg_0.1.0-alpha.6"
-        SHA512 6d378b4e3bf0e9fa18ba9752f05b857bddb01d822c0087c8b763b7bc6274218e0ead37957bfe363378fbafbd0c38315e0e7492f0ca921539b3ff795ade80588d
+        REF "vcpkg_0.1.0-alpha.7"
+        SHA512 9e324eaf79208487216f96430f3b77c01da4ec1663a6281d42eb65f3782642180be6f850ae4d763951e30d08a30559ad585d522012b970c41fb00c60d4ff1fca
         HEAD_REF main)
 endif()
 
@@ -34,7 +34,7 @@ vcpkg_cmake_configure(
     OPTIONS
         -DBUILD_SHARED_LIBS=ON
         -DBUILD_TESTING=OFF
-        -DGUANCE_WINDOWS_NATIVE_SDK_VERSION=0.1.0-alpha.6
+        -DGUANCE_WINDOWS_NATIVE_SDK_VERSION=0.1.0-alpha.7
         -DGUANCE_WINDOWS_NATIVE_BUILD_ELECTRON_BRIDGE=${GUANCE_WINDOWS_NATIVE_BUILD_ELECTRON_BRIDGE}
         -DGUANCE_WINDOWS_NATIVE_STAGE_RUNTIME=OFF)
 vcpkg_cmake_install()
