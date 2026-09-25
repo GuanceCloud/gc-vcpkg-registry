@@ -15,18 +15,15 @@ else()
     vcpkg_from_github(
         OUT_SOURCE_PATH SOURCE_PATH
         REPO GuanceCloud/datakit-windows-desktop
-        REF "vcpkg_0.1.0-alpha.7"
-        SHA512 9e324eaf79208487216f96430f3b77c01da4ec1663a6281d42eb65f3782642180be6f850ae4d763951e30d08a30559ad585d522012b970c41fb00c60d4ff1fca
+        REF "vcpkg_0.1.0-alpha.9"
+        SHA512 655f747c83ed62ca09a9fe09f5d14b828ea8522e665d78eb8825f514959d4d6384086472d233153b2636e9121ccedfca4ce05773de20abde41ef433254c22838
         HEAD_REF main)
 endif()
 
 set(GUANCE_WINDOWS_NATIVE_BUILD_ELECTRON_BRIDGE OFF)
 if("electron-bridge" IN_LIST FEATURES)
+    message(WARNING "electron-bridge is deprecated; use the npm Windows runtime for new Electron Full Mode applications. Mixed Mode continues to use vcpkg.")
     set(GUANCE_WINDOWS_NATIVE_BUILD_ELECTRON_BRIDGE ON)
-endif()
-set(GUANCE_WINDOWS_NATIVE_INSTALL_ELECTRON_ADAPTER OFF)
-if("electron-adapter" IN_LIST FEATURES OR "electron-bridge" IN_LIST FEATURES)
-    set(GUANCE_WINDOWS_NATIVE_INSTALL_ELECTRON_ADAPTER ON)
 endif()
 
 vcpkg_cmake_configure(
@@ -34,7 +31,7 @@ vcpkg_cmake_configure(
     OPTIONS
         -DBUILD_SHARED_LIBS=ON
         -DBUILD_TESTING=OFF
-        -DGUANCE_WINDOWS_NATIVE_SDK_VERSION=0.1.0-alpha.7
+        -DGUANCE_WINDOWS_NATIVE_SDK_VERSION=0.1.0-alpha.9
         -DGUANCE_WINDOWS_NATIVE_BUILD_ELECTRON_BRIDGE=${GUANCE_WINDOWS_NATIVE_BUILD_ELECTRON_BRIDGE}
         -DGUANCE_WINDOWS_NATIVE_STAGE_RUNTIME=OFF)
 vcpkg_cmake_install()
@@ -46,19 +43,6 @@ if("electron-bridge" IN_LIST FEATURES)
     vcpkg_copy_tools(
         TOOL_NAMES guance_windows_electron_bridge
         AUTO_CLEAN)
-endif()
-if(GUANCE_WINDOWS_NATIVE_INSTALL_ELECTRON_ADAPTER)
-    set(GUANCE_WINDOWS_NATIVE_ELECTRON_SOURCE
-        "${SOURCE_PATH}/src/Guance.Windows.Native/electron")
-    set(GUANCE_WINDOWS_NATIVE_ELECTRON_DESTINATION
-        "${CURRENT_PACKAGES_DIR}/tools/${PORT}/electron")
-    file(INSTALL "${GUANCE_WINDOWS_NATIVE_ELECTRON_SOURCE}/package.json"
-        DESTINATION "${GUANCE_WINDOWS_NATIVE_ELECTRON_DESTINATION}")
-    foreach(GUANCE_WINDOWS_NATIVE_ELECTRON_DIRECTORY IN ITEMS main preload internal)
-        file(INSTALL
-            "${GUANCE_WINDOWS_NATIVE_ELECTRON_SOURCE}/${GUANCE_WINDOWS_NATIVE_ELECTRON_DIRECTORY}"
-            DESTINATION "${GUANCE_WINDOWS_NATIVE_ELECTRON_DESTINATION}")
-    endforeach()
 endif()
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")

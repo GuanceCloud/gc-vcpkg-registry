@@ -1,6 +1,6 @@
 {
   "name": "guance-windows-native",
-  "version-semver": "0.1.0-alpha.7",
+  "version-semver": "0.1.0-alpha.9",
   "description": "Guance.Windows.Native observability SDK for RUM, distributed tracing, and logging",
   "homepage": "https://github.com/GuanceCloud/datakit-windows-desktop",
   "documentation": "https://github.com/GuanceCloud/datakit-windows-desktop#readme",
@@ -17,20 +17,8 @@
     }
   ],
   "features": {
-    "electron-adapter": {
-      "description": "Install the SDK-owned Electron JavaScript adapter"
-    },
     "electron-bridge": {
-      "description": "Install the Electron adapter and native Bridge EXE for Full Mode",
-      "dependencies": [
-        {
-          "name": "guance-windows-native",
-          "default-features": false,
-          "features": [
-            "electron-adapter"
-          ]
-        }
-      ]
+      "description": "Deprecated: legacy Electron Full Mode EXE; new consumers should use the npm Windows runtime package"
     }
   }
 }
