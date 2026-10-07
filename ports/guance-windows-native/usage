@@ -3,6 +3,23 @@ Guance.Windows.Native provides the CMake package GuanceWindowsNative:
     find_package(GuanceWindowsNative CONFIG REQUIRED)
     target_link_libraries(main PRIVATE Guance::WindowsNative)
 
+The optional local diagnostics collector is enabled with the diagnostics feature:
+
+    vcpkg install "guance-windows-native[diagnostics]:x64-windows"
+    target_link_libraries(main PRIVATE Guance::Diagnostics)
+
+Include guance_diagnostics.h. It uses the matching core DLL from this package;
+collection remains off until guance_diagnostics_start(). Stop and close diagnostics
+before unloading the collector DLL. Diagnostic stop does not flush business uploads.
+
+Session Replay is an optional same-version DLL:
+
+    vcpkg install "guance-windows-native[replay]:x64-windows"
+
+Keep guance_windows_replay.dll adjacent to guance_windows_native.dll. Existing
+Replay configuration and C API calls remain unchanged. When Replay is enabled
+without the DLL, the core reports one component diagnostic and continues RUM.
+
 Install the JavaScript adapter with npm for both Electron modes:
 
     npm install @cloudcare/electron-native-adapter
@@ -34,7 +51,6 @@ Main Process entry point; do not launch private protocol modules directly.
 
 The port supports dynamic x64-windows. Session Replay is experimental, opt-in,
 and disabled by default at runtime. The npm adapter exposes Browser RUM's records
-capability only when Full Mode nativeSettings.replayEnabled or Mixed Mode
-guance_electron_bridge_server_options.session_replay_enabled is enabled;
-otherwise it rejects Browser session_replay input. The port has no default SQLite
+capability only when the native Replay component is installed and enabled.
+The port has no default SQLite
 dependency and does not install JavaScript files.

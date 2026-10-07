@@ -1,6 +1,6 @@
 {
   "name": "guance-windows-native",
-  "version-semver": "0.1.0-alpha.9",
+  "version-semver": "0.1.0-alpha.10",
   "description": "Guance.Windows.Native observability SDK for RUM, distributed tracing, and logging",
   "homepage": "https://github.com/GuanceCloud/datakit-windows-desktop",
   "documentation": "https://github.com/GuanceCloud/datakit-windows-desktop#readme",
@@ -17,8 +17,14 @@
     }
   ],
   "features": {
+    "diagnostics": {
+      "description": "Optional local-only SDK self-traffic diagnostics collector with a matching core bridge"
+    },
     "electron-bridge": {
       "description": "Deprecated: legacy Electron Full Mode EXE; new consumers should use the npm Windows runtime package"
+    },
+    "replay": {
+      "description": "Optional same-version Session Replay DLL loaded by the core only when enabled"
     }
   }
 }
